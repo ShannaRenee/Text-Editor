@@ -28,15 +28,16 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
 registerRoute(
-  ({ request }) => {
-    console.log(request);
-    return (
-      // CSS
-      request.destination === 'style' ||
-      // JavaScript
-      request.destination === 'script'
-    );
-  },
+//   ({ request }) => {
+//     console.log(request);
+//     return (
+//       // CSS
+//       request.destination === 'style' ||
+//       // JavaScript
+//       request.destination === 'script'
+//     );
+//   },
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
   new StaleWhileRevalidate({
     cacheName: 'static-resources',
     plugins: [
@@ -48,4 +49,3 @@ registerRoute(
 );
 
 
-registerRoute();

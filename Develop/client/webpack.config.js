@@ -8,7 +8,7 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = () => {
   return {
-    mode: 'development',
+    mode: 'production',
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js'
@@ -27,17 +27,20 @@ module.exports = () => {
         swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
+				inject: true,
         name: 'Just Another Text Editor',
         short_name: 'TxtEditor',
         description: 'My awesome Text Editor!',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials',
+        theme_color: '#ffffff',
         start_url: '/',
         publicPath: '/',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            destination: path.join('assets', 'icons'),
           },
         ]
       })
