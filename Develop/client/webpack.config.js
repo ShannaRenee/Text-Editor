@@ -23,24 +23,22 @@ module.exports = () => {
         title: 'Text Editor'
       }),
       new InjectManifest({
-        swSrc: './src/sw.js',
-        swDest: 'service-worker.js',
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
         name: 'Just Another Text Editor',
         short_name: 'TxtEditor',
         description: 'My awesome Text Editor!',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+        crossorigin: 'use-credentials',
+        start_url: '/',
+        publicPath: '/',
         icons: [
           {
-            src: path.resolve('src/favicon.ico'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
           },
-          {
-            src: path.resolve('src/images/logo.png'),
-            size: '1024x1024' // you can also use the specifications pattern
-          }
         ]
       })
     ],
